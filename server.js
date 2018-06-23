@@ -1,0 +1,26 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+const cheerio = require("cheerio");
+const request = require("request");
+const exphbs = require("express-handlebars");
+
+app.engine("handlebars", exphbs({ defaultLayout: "main" }));
+app.set("view engine", "handlebars");
+
+const db = require('./models');
+
+const PORT = process.env.PORT || 3000;
+var app = express();    
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+app.use(express.static('public'));
+
+mongoose.connect('mongodb://localhost/mongoose')
+
+
+app.listen(PORT, function(){
+  console.log('App listening on Port: ' + PORT)
+});
+
