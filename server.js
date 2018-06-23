@@ -2,7 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const cheerio = require("cheerio");
-var axios = require("axios");
 const request = require("request");
 
 const db = require('./models');

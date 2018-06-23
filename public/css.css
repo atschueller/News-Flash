@@ -29,7 +29,7 @@
     z-index: 1;
     opacity: 0.5;
 }
-h3 {
+#wrapper h1 {
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
     font-size: 30px;
@@ -39,4 +39,14 @@ h3 {
     text-decoration: underline;
     text-decoration-color: black;
 }
+#articles {
+    display: inline-block;
+    overflow: auto;
+    width: 60%;
+    height: 700px;
+  }
+  #notes {
+    float: right;
+    width: 30%;
+  }
 
