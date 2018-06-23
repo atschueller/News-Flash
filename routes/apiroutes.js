@@ -8,7 +8,7 @@ module.exports = function (app) {
             const $ = cheerio.load(html);
 
             let results = [];
-            $('h2').each(function (i, element) {
+            $('.h2').each(function (i, element) {
                 const title = $(element).text();
 
                 const link = $(element).children().attr("href");
@@ -32,6 +32,29 @@ module.exports = function (app) {
 
     app.get("/articles", function(req, res) {
         db.Articles.find({})
+          .then(function(dbArticle) {
+            res.json(dbArticle);
+          })
+          .catch(function(err) {
+            res.json(err);
+          });
+      });
+
+      app.get("/articles/:id", function(req, res) {
+        db.Article.findOne({ _id: req.params.id })
+          .populate("note")
+          .then(function(dbArticle) {
+            res.json(dbArticle);
+          })
+          .catch(function(err) {
+          });
+      });
+
+      app.post("/articles/:id", function(req, res) {
+        db.Note.create(req.body)
+          .then(function(dbNote) {
+            return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+          })
           .then(function(dbArticle) {
             res.json(dbArticle);
           })
